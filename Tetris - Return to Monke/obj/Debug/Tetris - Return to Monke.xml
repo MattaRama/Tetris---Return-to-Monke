@@ -1,0 +1,87 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Tetris - Return to Monke
+</name>
+</assembly>
+<members>
+<member name="T:Tetris___Return_to_Monke.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:Tetris___Return_to_Monke.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:Tetris___Return_to_Monke.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:Tetris___Return_to_Monke.frmReturnToMonke">
+ <summary>
+ The main form, housing the start screen and links to the other forms
+ </summary>
+</member>
+<member name="T:Tetris___Return_to_Monke.frmGameWindow">
+ <summary>
+ The game window
+ </summary>
+</member>
+<member name="T:Tetris___Return_to_Monke.TetrisCell">
+ <summary>
+ Tetris 
+ </summary>
+</member>
+<member name="T:Tetris___Return_to_Monke.GameBoard">
+ <summary>
+ GameBoard for the TetrisGroups
+ </summary>
+</member>
+<member name="M:Tetris___Return_to_Monke.GameBoard.GeneratePicBoard(Tetris___Return_to_Monke.frmGameWindow@)">
+ <summary>
+ Generates an array of picture boxes
+ </summary>
+</member>
+<member name="M:Tetris___Return_to_Monke.GameBoard.GetCellPosition(Tetris___Return_to_Monke.TetrisCell)">
+ <summary>
+ Gets the (x, y) of a cell
+ </summary>
+ <param name="cell"></param>
+ <returns>Pair of coordinates from GameBoard, returned as a KeyValuePair</returns>
+</member>
+<member name="T:Tetris___Return_to_Monke.TetrisCube">
+ <summary>
+ A class for displaying and keeping track of the different cubes on the screen
+ </summary>
+</member>
+<member name="T:Tetris___Return_to_Monke.TetrisGroup">
+ <summary>
+ Creates and keeps track of groups of TetrisCubes
+ </summary>
+</member>
+<member name="T:Tetris___Return_to_Monke.TetrisRow">
+ <summary>
+ A collection of TetrisCells
+ </summary>
+</member>
+<member name="M:Tetris___Return_to_Monke.TetrisRow.GenerateCells(System.Int32,System.Int32)">
+ <summary>
+ A method for generating a row of tetris cells
+ </summary>
+ <param name="rowSize">The count of tetris cells. Basically always 15</param>
+ <param name="rowNumber">The position of the row, particularly as a 1d count</param>
+</member>
+<member name="M:Tetris___Return_to_Monke.TetrisRow.GetCellAtPosition(System.Int32)">
+ <summary>
+ Gets a cell at a certain position
+ </summary>
+ <param name="position">The position in the array</param>
+ <returns>The cell at a position in the collection</returns>
+</member>
+</members>
+</doc>

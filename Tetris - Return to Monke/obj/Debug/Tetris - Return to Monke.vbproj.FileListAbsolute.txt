@@ -1,0 +1,13 @@
+C:\Users\matta\source\repos\Tetris - Return to Monke\Tetris - Return to Monke\bin\Debug\Tetris - Return to Monke.exe.config
+C:\Users\matta\source\repos\Tetris - Return to Monke\Tetris - Return to Monke\bin\Debug\Tetris - Return to Monke.exe
+C:\Users\matta\source\repos\Tetris - Return to Monke\Tetris - Return to Monke\bin\Debug\Tetris - Return to Monke.pdb
+C:\Users\matta\source\repos\Tetris - Return to Monke\Tetris - Return to Monke\bin\Debug\Tetris - Return to Monke.xml
+C:\Users\matta\source\repos\Tetris - Return to Monke\Tetris - Return to Monke\obj\Debug\Tetris - Return to Monke.vbprojAssemblyReference.cache
+C:\Users\matta\source\repos\Tetris - Return to Monke\Tetris - Return to Monke\obj\Debug\Tetris___Return_to_Monke.frmReturnToMonke.resources
+C:\Users\matta\source\repos\Tetris - Return to Monke\Tetris - Return to Monke\obj\Debug\Tetris___Return_to_Monke.Resources.resources
+C:\Users\matta\source\repos\Tetris - Return to Monke\Tetris - Return to Monke\obj\Debug\Tetris - Return to Monke.vbproj.GenerateResource.cache
+C:\Users\matta\source\repos\Tetris - Return to Monke\Tetris - Return to Monke\obj\Debug\Tetris - Return to Monke.vbproj.CoreCompileInputs.cache
+C:\Users\matta\source\repos\Tetris - Return to Monke\Tetris - Return to Monke\obj\Debug\Tetris - Return to Monke.exe
+C:\Users\matta\source\repos\Tetris - Return to Monke\Tetris - Return to Monke\obj\Debug\Tetris - Return to Monke.xml
+C:\Users\matta\source\repos\Tetris - Return to Monke\Tetris - Return to Monke\obj\Debug\Tetris - Return to Monke.pdb
+C:\Users\matta\source\repos\Tetris - Return to Monke\Tetris - Return to Monke\obj\Debug\Tetris___Return_to_Monke.frmGameWindow.resources
