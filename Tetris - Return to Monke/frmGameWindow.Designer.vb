@@ -24,11 +24,32 @@ Partial Class frmGameWindow
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmGameWindow))
-        Me.tmrUpdateTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrTick = New System.Windows.Forms.Timer(Me.components)
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
-        'tmrUpdateTimer
+        'tmrTick
         '
+        Me.tmrTick.Interval = 500
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(310, 612)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 0
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(400, 612)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 1
+        Me.Button2.Text = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'frmGameWindow
         '
@@ -37,11 +58,15 @@ Partial Class frmGameWindow
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(498, 667)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button1)
         Me.Name = "frmGameWindow"
         Me.Text = "Tetris: Return to Monke"
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents tmrUpdateTimer As Timer
+    Friend WithEvents tmrTick As Timer
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
 End Class

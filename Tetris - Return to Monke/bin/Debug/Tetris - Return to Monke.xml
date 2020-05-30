@@ -32,9 +32,29 @@ Tetris - Return to Monke
  The game window
  </summary>
 </member>
+<member name="M:Tetris___Return_to_Monke.frmGameWindow.tmrTick_Tick(System.Object,System.EventArgs)">
+ <summary>
+ A global game timer, running periodic commands every tick
+ </summary>
+</member>
+<member name="M:Tetris___Return_to_Monke.frmGameWindow.TranslateDown">
+ <summary>
+ Translates all groups on the board down
+ </summary>
+</member>
 <member name="T:Tetris___Return_to_Monke.TetrisCell">
  <summary>
  Tetris 
+ </summary>
+</member>
+<member name="M:Tetris___Return_to_Monke.TetrisCell.ContainsCube">
+ <summary>
+ Checks if this cell contains a TetrisCube or not
+ </summary>
+</member>
+<member name="M:Tetris___Return_to_Monke.TetrisCell.GetCube">
+ <summary>
+ Gets the activeCube of this cell
  </summary>
 </member>
 <member name="T:Tetris___Return_to_Monke.GameBoard">
@@ -47,16 +67,62 @@ Tetris - Return to Monke
  Generates an array of picture boxes
  </summary>
 </member>
-<member name="M:Tetris___Return_to_Monke.GameBoard.GetCellPosition(Tetris___Return_to_Monke.TetrisCell)">
+<member name="M:Tetris___Return_to_Monke.GameBoard.GetCellPosition(Tetris___Return_to_Monke.TetrisCube)">
  <summary>
  Gets the (x, y) of a cell
  </summary>
  <param name="cell"></param>
  <returns>Pair of coordinates from GameBoard, returned as a KeyValuePair</returns>
 </member>
+<member name="M:Tetris___Return_to_Monke.GameBoard.AssignCubeToCell(System.Collections.Generic.KeyValuePair{System.Int32,System.Int32},Tetris___Return_to_Monke.TetrisCube)">
+ <summary>
+ Assigns a particular TetrisCube to a new Cell
+ </summary>
+ <param name="position">The position of the cell, as (x, y)</param>
+ <param name="cube">The TetrisCube instance</param>
+</member>
+<member name="M:Tetris___Return_to_Monke.GameBoard.GetCubeAtCoordinate(System.Collections.Generic.KeyValuePair{System.Int32,System.Int32})">
+ <summary>
+ Gets the cube at a particular cell
+ </summary>
+ <param name="position">The position of the cell</param>
+ <returns></returns>
+</member>
+<member name="M:Tetris___Return_to_Monke.GameBoard.GenerateCubeId">
+ <summary>
+ Generates a random cubeID
+ </summary>
+</member>
 <member name="T:Tetris___Return_to_Monke.TetrisCube">
  <summary>
  A class for displaying and keeping track of the different cubes on the screen
+ </summary>
+</member>
+<member name="M:Tetris___Return_to_Monke.TetrisCube.#ctor">
+ <summary>
+ Constructor
+ </summary>
+</member>
+<member name="M:Tetris___Return_to_Monke.TetrisCube.Translate(System.Int32,System.Int32)">
+ <summary>
+ Translates the Cube to a different cell if possible
+ </summary>
+ <param name="x">Amount to translate "left" value by</param>
+ <param name="y">Amount to translate "top" value by</param>
+</member>
+<member name="M:Tetris___Return_to_Monke.TetrisCube.Lock">
+ <summary>
+ Locks the cube 
+ </summary>
+</member>
+<member name="M:Tetris___Return_to_Monke.TetrisCube.IsLocked">
+ <summary>
+ Returns the locked status of this cube
+ </summary>
+</member>
+<member name="M:Tetris___Return_to_Monke.TetrisCube.ShouldLock(System.Collections.Generic.KeyValuePair{System.Int32,System.Int32})">
+ <summary>
+ Checks if the TetrisCube should lock or not
  </summary>
 </member>
 <member name="T:Tetris___Return_to_Monke.TetrisGroup">

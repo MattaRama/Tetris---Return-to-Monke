@@ -43,7 +43,7 @@ Public Class TetrisRow
             'Adds to form controls
             SharedResources.gameWindow.Controls.Add(cellCollection(i))
 
-            Thread.Sleep(10) ' Just because I like looking at the console fill up over time
+            'Thread.Sleep(10) ' Just because I like looking at the console fill up over time
 
         Next i
 
@@ -57,6 +57,26 @@ Public Class TetrisRow
     Public Function GetCellAtPosition(position As Integer) As TetrisCell
 
         Return cellCollection(position)
+
+    End Function
+
+
+    Public Function RowComplete() As Boolean
+
+        'Checks all cells
+        For Each c In cellCollection
+
+            'If any cell is empty, the row is not full
+            If c.ContainsCube() Then
+
+                Return False
+
+            End If
+
+        Next c
+
+        'No cells are full, so the row is full
+        Return True
 
     End Function
 
