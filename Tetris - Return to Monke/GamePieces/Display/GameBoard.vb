@@ -55,8 +55,7 @@ Public Class GameBoard
 
         Next i
 
-        'Nothing was found. Probably going to cause problems if this happens
-        Throw New Exception
+        Throw New Exception("Something went really wrong here. Very very wrong.")
         Return Nothing
 
     End Function

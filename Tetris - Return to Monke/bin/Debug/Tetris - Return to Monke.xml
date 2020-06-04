@@ -42,6 +42,25 @@ Tetris - Return to Monke
  Translates all groups on the board down
  </summary>
 </member>
+<member name="M:Tetris___Return_to_Monke.frmGameWindow.frmGameWindow_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+ <summary>
+ Keydown detection
+ </summary>
+</member>
+<member name="T:Tetris___Return_to_Monke.Pieces">
+ <summary>
+ I was going to use an enum for this but I didn't know they dont support classes or non-elementary data types.
+ Codes for all of the pieces and the formation of those pieces
+ </summary>
+ TODO: UPDATE THIS TO USE FILES FOR STORAGE AS OPPOSED TO HARD CODING
+ MAYBE TODO: Fix implicit declarations. Not a problem, but possibly something that I could fix.
+</member>
+<member name="M:Tetris___Return_to_Monke.Pieces.GetRandomPiece">
+ <summary>
+ Returns a random piece
+ </summary>
+ <returns></returns>
+</member>
 <member name="T:Tetris___Return_to_Monke.TetrisCell">
  <summary>
  Tetris 
@@ -125,10 +144,37 @@ Tetris - Return to Monke
  Checks if the TetrisCube should lock or not
  </summary>
 </member>
+<member name="M:Tetris___Return_to_Monke.TetrisCube.GetLocation">
+ <summary>
+ Gets the location of this particular cube
+ </summary>
+</member>
 <member name="T:Tetris___Return_to_Monke.TetrisGroup">
  <summary>
  Creates and keeps track of groups of TetrisCubes
  </summary>
+</member>
+<member name="M:Tetris___Return_to_Monke.TetrisGroup.#ctor(System.Collections.Generic.List{Tetris___Return_to_Monke.TetrisCube})">
+ <summary>
+ Constructor
+ </summary>
+</member>
+<member name="M:Tetris___Return_to_Monke.TetrisGroup.CreateTetrisGroup(Tetris___Return_to_Monke.TetrisCube[])">
+ <summary>
+ Creates a TetrisGroup, doing all of the hard work
+ </summary>
+ <param name="cubes">The individual cubes for the TetrisGroup</param>
+ <returns>The TetrisGroup</returns>
+</member>
+<member name="M:Tetris___Return_to_Monke.TetrisGroup.CreateTetrisGroup(System.Collections.Generic.List{Tetris___Return_to_Monke.TetrisCube})">
+ <summary>
+ Creates a TetrisGroup, doing all of the hard work
+ </summary>
+ <param name="tlist">The individual cubes for the TetrisGroup</param>
+ <returns>The TetrisGroup</returns>
+</member>
+<member name="M:Tetris___Return_to_Monke.TetrisGroup.IsLocked">
+ <returns>locked</returns>
 </member>
 <member name="T:Tetris___Return_to_Monke.TetrisRow">
  <summary>

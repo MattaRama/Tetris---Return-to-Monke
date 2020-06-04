@@ -6,6 +6,7 @@ Public Class TetrisCube
 
     Dim locked As Boolean = False
     Public cubeID As Integer
+    Public group As TetrisGroup
 
     ''' <summary>
     ''' Constructor
@@ -40,9 +41,6 @@ Public Class TetrisCube
         pos = New KeyValuePair(Of Integer, Integer)(pos.Key + x, pos.Value + y)
         SharedResources.gameWindow.board.AssignCubeToCell(pos, Me)
 
-        'Checks if cube should be locked
-        ShouldLock(pos)
-
     End Sub
 
     ''' <summary>
@@ -66,25 +64,40 @@ Public Class TetrisCube
     ''' <summary>
     ''' Checks if the TetrisCube should lock or not
     ''' </summary>
-    Sub ShouldLock(pos As KeyValuePair(Of Integer, Integer))
+    Function ShouldLock(pos As KeyValuePair(Of Integer, Integer)) As Boolean
 
         'Checks for bottom position
         If pos.Value = 17 Then
 
-            Lock()
-            Return
+            Return True
 
         End If
 
         'Checks for block below
         If Not SharedResources.gameWindow.board.GetCubeAtCoordinate(New KeyValuePair(Of Integer, Integer)(pos.Key, pos.Value + 1)) Is Nothing Then
 
-            Lock()
-            Return
+            'Checks if the block below is part of the same group
+            If Not SharedResources.gameWindow.board.GetCubeAtCoordinate(New KeyValuePair(Of Integer, Integer)(pos.Key, pos.Value + 1)).group.Equals(group) Then
+
+                Return True
+
+            End If
 
         End If
 
-    End Sub
+        'Should not lock
+        Return False
+
+    End Function
+
+    ''' <summary>
+    ''' Gets the location of this particular cube
+    ''' </summary>
+    Function GetLocation() As KeyValuePair(Of Integer, Integer)
+
+        Return SharedResources.gameWindow.board.GetCellPosition(Me)
+
+    End Function
 
     Public Overrides Function Equals(obj As Object) As Boolean
 
