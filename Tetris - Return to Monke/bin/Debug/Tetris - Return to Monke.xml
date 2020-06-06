@@ -47,13 +47,25 @@ Tetris - Return to Monke
  Keydown detection
  </summary>
 </member>
+<member name="M:Tetris___Return_to_Monke.frmGameWindow.cmdStartGame_Click(System.Object,System.EventArgs)">
+ <summary>
+ Button for starting the game
+ </summary>
+</member>
+<member name="M:Tetris___Return_to_Monke.frmGameWindow.AwardPoints(System.Int32)">
+ <summary>
+ Appends the points variable by a certain quantity
+ </summary>
+ <param name="quantity">Amount to append</param>
+ <returns>Current point count</returns>
+</member>
 <member name="T:Tetris___Return_to_Monke.Pieces">
  <summary>
  I was going to use an enum for this but I didn't know they dont support classes or non-elementary data types.
  Codes for all of the pieces and the formation of those pieces
  </summary>
  TODO: UPDATE THIS TO USE FILES FOR STORAGE AS OPPOSED TO HARD CODING
- MAYBE TODO: Fix implicit declarations. Not a problem, but possibly something that I could fix.
+ MAYBE TODO: Fix implicit declarations. Not a problem, but possibly something that could be better.
 </member>
 <member name="M:Tetris___Return_to_Monke.Pieces.GetRandomPiece">
  <summary>
@@ -112,6 +124,16 @@ Tetris - Return to Monke
  Generates a random cubeID
  </summary>
 </member>
+<member name="M:Tetris___Return_to_Monke.GameBoard.GetRow(System.Int32)">
+ <summary>
+ Gets a specific row by its Row Number
+ </summary>
+</member>
+<member name="M:Tetris___Return_to_Monke.GameBoard.CompleteRow(Tetris___Return_to_Monke.TetrisRow)">
+ <summary>
+ Completes a row, translating every row down after that
+ </summary>
+</member>
 <member name="T:Tetris___Return_to_Monke.TetrisCube">
  <summary>
  A class for displaying and keeping track of the different cubes on the screen
@@ -128,6 +150,11 @@ Tetris - Return to Monke
  </summary>
  <param name="x">Amount to translate "left" value by</param>
  <param name="y">Amount to translate "top" value by</param>
+</member>
+<member name="M:Tetris___Return_to_Monke.TetrisCube.CanTranslateBy(System.Int32,System.Int32)">
+ <summary>
+ Checks if the cube can be translated to a different position relative to the cube without interacting with another cube
+ </summary>
 </member>
 <member name="M:Tetris___Return_to_Monke.TetrisCube.Lock">
  <summary>
@@ -176,6 +203,16 @@ Tetris - Return to Monke
 <member name="M:Tetris___Return_to_Monke.TetrisGroup.IsLocked">
  <returns>locked</returns>
 </member>
+<member name="M:Tetris___Return_to_Monke.TetrisGroup.CanTranslateBy(System.Int32,System.Int32)">
+ <summary>
+ Checks if the group can be translated to a position relative to the group
+ </summary>
+</member>
+<member name="M:Tetris___Return_to_Monke.TetrisGroup.Translate(System.Int32,System.Int32)">
+ <summary>
+ Translates the group to a position relative to the group
+ </summary>
+</member>
 <member name="T:Tetris___Return_to_Monke.TetrisRow">
  <summary>
  A collection of TetrisCells
@@ -194,6 +231,16 @@ Tetris - Return to Monke
  </summary>
  <param name="position">The position in the array</param>
  <returns>The cell at a position in the collection</returns>
+</member>
+<member name="M:Tetris___Return_to_Monke.TetrisRow.Clear">
+ <summary>
+ Clears the row of TetrisCube
+ </summary>
+</member>
+<member name="M:Tetris___Return_to_Monke.TetrisRow.Inherit(Tetris___Return_to_Monke.TetrisRow)">
+ <summary>
+ Inherits
+ </summary>
 </member>
 </members>
 </doc>

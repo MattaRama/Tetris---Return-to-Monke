@@ -55,7 +55,7 @@ Public Class GameBoard
 
         Next i
 
-        Throw New Exception("Something went really wrong here. Very very wrong.")
+        'Throw New Exception("Something went really wrong here. Very very wrong.")
         Return Nothing
 
     End Function
@@ -78,6 +78,7 @@ Public Class GameBoard
     ''' <returns></returns>
     Public Function GetCubeAtCoordinate(position As KeyValuePair(Of Integer, Integer)) As TetrisCube
 
+        'Actual accurate return
         Return boardCollection(position.Value).GetCellAtPosition(position.Key).GetCube()
 
     End Function
@@ -112,5 +113,40 @@ Public Class GameBoard
         Return False ' Not needed for the code to function, but I didn't like Visual Studio thinking there was an error
 
     End Function
+
+    ''' <summary>
+    ''' Gets a specific row by its Row Number
+    ''' </summary>
+    Public Function GetRow(rowNumber As Integer) As TetrisRow
+
+        Return boardCollection(rowNumber)
+
+    End Function
+
+    ''' <summary>
+    ''' Completes a row, translating every row down after that
+    ''' </summary>
+    Public Sub CompleteRow(row As TetrisRow)
+
+        'Awards points for completion of the row
+        SharedResources.gameWindow.AwardPoints(100)
+
+        'Clears row
+        row.Clear()
+
+        'Translates all rows down with a series of Inherits and clears
+        For i As Integer = row.rowNumber To 1 Step -1
+
+            Console.WriteLine("i: " & i)
+
+            boardCollection(i).Inherit(boardCollection(i - 1))
+            boardCollection(i - 1).Clear()
+
+        Next
+
+        'Clears top row
+        boardCollection(0).Clear()
+
+    End Sub
 
 End Class

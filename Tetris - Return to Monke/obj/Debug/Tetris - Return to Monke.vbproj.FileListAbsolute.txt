@@ -11,3 +11,4 @@ C:\Users\matta\source\repos\Tetris - Return to Monke\Tetris - Return to Monke\ob
 C:\Users\matta\source\repos\Tetris - Return to Monke\Tetris - Return to Monke\obj\Debug\Tetris - Return to Monke.xml
 C:\Users\matta\source\repos\Tetris - Return to Monke\Tetris - Return to Monke\obj\Debug\Tetris - Return to Monke.pdb
 C:\Users\matta\source\repos\Tetris - Return to Monke\Tetris - Return to Monke\obj\Debug\Tetris___Return_to_Monke.frmGameWindow.resources
+C:\Users\matta\source\repos\Tetris - Return to Monke\Tetris - Return to Monke\obj\Debug\Tetris___Return_to_Monke.frmSettings.resources

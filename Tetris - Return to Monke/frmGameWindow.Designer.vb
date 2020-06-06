@@ -25,33 +25,46 @@ Partial Class frmGameWindow
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmGameWindow))
         Me.tmrTick = New System.Windows.Forms.Timer(Me.components)
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.cmdStartGame = New System.Windows.Forms.Button()
+        Me.lblScore = New System.Windows.Forms.Label()
+        Me.lblQuit = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'tmrTick
         '
         Me.tmrTick.Interval = 500
         '
-        'Button1
+        'cmdStartGame
         '
-        Me.Button1.Location = New System.Drawing.Point(310, 612)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 0
-        Me.Button1.TabStop = False
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.cmdStartGame.Font = New System.Drawing.Font("Microsoft YaHei", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdStartGame.Location = New System.Drawing.Point(12, 119)
+        Me.cmdStartGame.Name = "cmdStartGame"
+        Me.cmdStartGame.Size = New System.Drawing.Size(474, 288)
+        Me.cmdStartGame.TabIndex = 2
+        Me.cmdStartGame.Text = "START GAME"
+        Me.cmdStartGame.UseVisualStyleBackColor = True
         '
-        'Button2
+        'lblScore
         '
-        Me.Button2.Location = New System.Drawing.Point(400, 612)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 1
-        Me.Button2.TabStop = False
-        Me.Button2.Text = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.lblScore.AutoSize = True
+        Me.lblScore.BackColor = System.Drawing.Color.Olive
+        Me.lblScore.Font = New System.Drawing.Font("Microsoft Sans Serif", 48.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblScore.ForeColor = System.Drawing.SystemColors.MenuText
+        Me.lblScore.Location = New System.Drawing.Point(12, 585)
+        Me.lblScore.Name = "lblScore"
+        Me.lblScore.Size = New System.Drawing.Size(279, 73)
+        Me.lblScore.TabIndex = 3
+        Me.lblScore.Text = "Score: 0"
+        '
+        'lblQuit
+        '
+        Me.lblQuit.AutoSize = True
+        Me.lblQuit.Font = New System.Drawing.Font("Microsoft YaHei", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblQuit.Location = New System.Drawing.Point(428, 585)
+        Me.lblQuit.Name = "lblQuit"
+        Me.lblQuit.Size = New System.Drawing.Size(58, 28)
+        Me.lblQuit.TabIndex = 4
+        Me.lblQuit.Text = "Quit"
         '
         'frmGameWindow
         '
@@ -60,15 +73,18 @@ Partial Class frmGameWindow
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(498, 667)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.lblQuit)
+        Me.Controls.Add(Me.lblScore)
+        Me.Controls.Add(Me.cmdStartGame)
         Me.Name = "frmGameWindow"
         Me.Text = "Tetris: Return to Monke"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents tmrTick As Timer
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents cmdStartGame As Button
+    Friend WithEvents lblScore As Label
+    Friend WithEvents lblQuit As Label
 End Class

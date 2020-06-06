@@ -44,6 +44,53 @@ Public Class TetrisCube
     End Sub
 
     ''' <summary>
+    ''' Checks if the cube can be translated to a different position relative to the cube without interacting with another cube
+    ''' </summary>
+    Public Function CanTranslateBy(x As Integer, y As Integer) As Boolean
+
+        'Gets position
+        Dim pos As KeyValuePair(Of Integer, Integer) = SharedResources.gameWindow.board.GetCellPosition(Me)
+
+        'Checks if it is at a border
+        If pos.Key <= 0 And x < 0 Then
+
+            Return False
+
+        End If
+
+        If pos.Key >= 14 And x > 0 Then
+
+            Return False
+
+        End If
+
+        If pos.Value >= 17 And y > 0 Then
+
+            Return False
+
+        End If
+
+        'Adds values to position
+        pos = New KeyValuePair(Of Integer, Integer)(pos.Key + x, pos.Value + y)
+
+        'Checks if position is occupied
+        If SharedResources.gameWindow.board.GetCubeAtCoordinate(pos) Is Nothing Then
+
+            Return True
+
+        End If
+
+        If SharedResources.gameWindow.board.GetCubeAtCoordinate(pos).group.Equals(group) Then
+
+            Return True
+
+        End If
+
+        Return False
+
+    End Function
+
+    ''' <summary>
     ''' Locks the cube 
     ''' </summary>
     Public Sub Lock()
@@ -77,7 +124,7 @@ Public Class TetrisCube
         If Not SharedResources.gameWindow.board.GetCubeAtCoordinate(New KeyValuePair(Of Integer, Integer)(pos.Key, pos.Value + 1)) Is Nothing Then
 
             'Checks if the block below is part of the same group
-            If Not SharedResources.gameWindow.board.GetCubeAtCoordinate(New KeyValuePair(Of Integer, Integer)(pos.Key, pos.Value + 1)).group.Equals(group) Then
+            If Not group.Equals(SharedResources.gameWindow.board.GetCubeAtCoordinate(New KeyValuePair(Of Integer, Integer)(pos.Key, pos.Value + 1)).group) Then
 
                 Return True
 

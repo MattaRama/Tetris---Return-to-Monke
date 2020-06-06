@@ -6,6 +6,7 @@ Public Class TetrisGroup
 
     Dim cubes As List(Of TetrisCube)
     Dim locked As Boolean = False
+    Public canTranslate As Boolean = True
 
     ''' <summary>
     ''' Constructor
@@ -102,14 +103,52 @@ Public Class TetrisGroup
 
     End Function
 
-    Public Sub Translate(x As Integer, y As Integer)
 
-        'Translates all cubes
+    ''' <summary>
+    ''' Checks if the group can be translated to a position relative to the group
+    ''' </summary>
+    Public Function CanTranslateBy(x As Integer, y As Integer) As Boolean
+
+        'Checks for each cube if it can be translating. If any cube denies, then it returns false
         For Each cube In cubes
 
-            cube.Translate(x, y)
+            If cube.CanTranslateBy(x, y) = False Then
 
-        Next cube
+                Return False
+
+            End If
+
+        Next
+
+        'No objections, so it can translate by this quantity
+        Return True
+
+    End Function
+
+    ''' <summary>
+    ''' Translates the group to a position relative to the group
+    ''' </summary>
+    Public Sub Translate(x As Integer, y As Integer)
+
+        'Translation rules, because I screwed up and this is the fix
+        'Translates all cubes
+        If x < 0 Then
+
+            For i As Integer = cubes.Count - 1 To 0 Step -1
+
+                cubes(i).Translate(x, y)
+
+            Next
+
+        Else
+
+            For i As Integer = 0 To cubes.Count - 1
+
+                cubes(i).Translate(x, y)
+
+            Next
+
+        End If
 
         'Check each one for it's lock status
         'If any one of them is locked, all of them will be locked

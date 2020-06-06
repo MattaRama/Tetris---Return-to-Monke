@@ -1,15 +1,18 @@
-﻿Imports System.Threading
+﻿Imports System.Security.Cryptography.X509Certificates
+Imports System.Threading
 ''' <summary>
 ''' A collection of TetrisCells
 ''' </summary>
 Public Class TetrisRow
 
     Dim cellCollection As List(Of TetrisCell) = New List(Of TetrisCell)
+    Public rowNumber As Integer
 
     Public Sub New(rowSize As Integer, rowNumber As Integer)
 
         'Generates all cells
         GenerateCells(rowSize, rowNumber)
+        Me.rowNumber = rowNumber
 
     End Sub
 
@@ -59,6 +62,35 @@ Public Class TetrisRow
         Return cellCollection(position)
 
     End Function
+
+    ''' <summary>
+    ''' Clears the row of TetrisCube
+    ''' </summary>
+    Public Sub Clear()
+
+        'Sets all cells to house nothing
+        For Each cell In cellCollection
+
+            cell.SetCubeDisplay(Nothing)
+
+        Next
+
+    End Sub
+
+
+    ''' <summary>
+    ''' Inherits
+    ''' </summary>
+    Public Sub Inherit(row As TetrisRow)
+
+        'Inherits cubes
+        For i As Integer = 0 To 8
+
+            cellCollection(i).SetCubeDisplay(row.cellCollection(i).GetCube())
+
+        Next
+
+    End Sub
 
 
     Public Function RowComplete() As Boolean

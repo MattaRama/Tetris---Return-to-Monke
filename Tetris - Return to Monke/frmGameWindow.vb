@@ -4,6 +4,7 @@
 Public Class frmGameWindow
 
     Public board As GameBoard = New GameBoard()
+    Dim totalPoints As Integer = -10
 
     Private Sub frmGameWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -22,8 +23,6 @@ Public Class frmGameWindow
 
         TranslateDown() 'Translates groups down
 
-        Button1.Enabled = True
-
     End Sub
 
     ''' <summary>
@@ -38,7 +37,10 @@ Public Class frmGameWindow
         For Each group In board.groups
 
             'Translates group down
+            Console.WriteLine("Translating down")
+            group.canTranslate = False
             group.Translate(0, 1)
+            group.canTranslate = True
 
             'Disbands group if it is locked
             If group.IsLocked() Then
@@ -68,22 +70,37 @@ Public Class frmGameWindow
 
     Sub CreateNewPiece()
 
+        AwardPoints(10)
+
+        'Checks to see for full rows. If they are full, the row is cleared and points are added
+        For i As Integer = 17 To 0 Step -1
+
+            Dim row As TetrisRow = board.GetRow(i)
+
+            If row.RowComplete() Then
+
+                board.CompleteRow(row)
+                i += 1
+
+            End If
+
+        Next
+
         'Grabs a configuration
-        Dim cubeConfig As Integer(,) = Pieces.GetRandomPiece()
+        Dim cubeConfig As Point() = Pieces.GetRandomPiece()
         Dim color = GetRandomColor()
 
         'Creates cubes
         Dim cubes As List(Of TetrisCube) = New List(Of TetrisCube)
 
-        For i As Integer = 0 To cubeConfig.length - 1
+        For i As Integer = 0 To cubeConfig.Length - 1
 
             'Creates Cube
             cubes.Add(New TetrisCube())
 
             'Configures cube
             cubes(i).BackColor = color
-            Console.WriteLine(i & " : " & cubeConfig(i, 0))
-            board.AssignCubeToCell(New KeyValuePair(Of Integer, Integer)(cubeConfig(i, 0), cubeConfig(i, 1)), cubes(i))
+            board.AssignCubeToCell(New KeyValuePair(Of Integer, Integer)(cubeConfig(i).X, cubeConfig(i).Y), cubes(i))
 
         Next i
 
@@ -133,7 +150,12 @@ Public Class frmGameWindow
     ''' </summary>
     Private Sub frmGameWindow_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
 
-        Console.WriteLine("Keypress")
+        'Stops keypresses if there are no active game pieces. Prevents an error.
+        If board.groups.Count = 0 Then
+
+            Return
+
+        End If
 
         'Move pieces left
         If e.KeyCode = Keys.Left Or e.KeyCode = Keys.A Then
@@ -141,7 +163,12 @@ Public Class frmGameWindow
             For Each group In board.groups
 
                 'Translates group down
-                group.Translate(-1, 0)
+                If group.canTranslate And group.CanTranslateBy(-1, 0) Then
+
+                    Console.WriteLine("Translating Left")
+                    group.Translate(-1, 0)
+
+                End If
 
             Next group
 
@@ -153,52 +180,105 @@ Public Class frmGameWindow
             For Each group In board.groups
 
                 'Translates group down
-                group.Translate(1, 0)
+                If group.canTranslate And group.CanTranslateBy(1, 0) Then
+
+                    Console.WriteLine("Translating Right")
+                    group.Translate(1, 0)
+
+                End If
 
             Next group
+
+        End If
+
+        'Moves pieces down
+        If e.KeyCode = Keys.Down Or e.KeyCode = Keys.S Then
+
+            For Each group In board.groups
+
+                'Translates group down
+                If group.canTranslate And group.CanTranslateBy(0, 1) Then
+
+                    Console.WriteLine("Translating Down")
+                    group.Translate(0, 1)
+
+                End If
+
+            Next group
+
+        End If
+
+
+
+        'Checks for cube locking
+        Dim toBeRemoved As List(Of TetrisGroup) = New List(Of TetrisGroup)
+
+        'Translates groups down
+        For Each group In board.groups
+
+            'Disbands group if it is locked
+            If group.IsLocked() Then
+
+                toBeRemoved.Add(group)
+
+            End If
+
+        Next group
+
+        'Removes locked groups
+        For Each group In toBeRemoved
+
+            board.groups.Remove(group)
+
+        Next group
+
+        'Creates a new piece one one has been created
+        If toBeRemoved.Count <> 0 Then
+
+            CreateNewPiece()
 
         End If
 
     End Sub
 
 
+    ''' <summary>
+    ''' Button for starting the game
+    ''' </summary>
+    Private Sub cmdStartGame_Click(sender As Object, e As EventArgs) Handles cmdStartGame.Click
 
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
+        'Makes game piece
         CreateNewPiece()
 
-        '<DEPRICATED>
-        'Creates a testing group
-        'Dim t1 As TetrisCube = New TetrisCube()
-        'Dim t2 As TetrisCube = New TetrisCube()
-        'Dim t3 As TetrisCube = New TetrisCube()
-        'Dim t4 As TetrisCube = New TetrisCube()
-
-        't1.BackColor = GetRandomColor()
-        't2.BackColor = GetRandomColor()
-        't3.BackColor = GetRandomColor()
-        't4.BackColor = GetRandomColor()
-
-        'board.AssignCubeToCell(New KeyValuePair(Of Integer, Integer)(2, 5), t1)
-        'board.AssignCubeToCell(New KeyValuePair(Of Integer, Integer)(2, 4), t2)
-        'board.AssignCubeToCell(New KeyValuePair(Of Integer, Integer)(2, 3), t3)
-        'board.AssignCubeToCell(New KeyValuePair(Of Integer, Integer)(2, 2), t4)
-
-        'board.groups.Add(TetrisGroup.CreateTetrisGroup(t1, t2, t3, t4))
-
-        'sender.Enabled = False
-        '</DEPRICATED>
-
-    End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-
+        'Starts Timer
         tmrTick.Enabled = True
+
+        'Removes button
         sender.Enabled = False
+        sender.Visible = False
 
     End Sub
 
+    ''' <summary>
+    ''' Appends the points variable by a certain quantity
+    ''' </summary>
+    ''' <param name="quantity">Amount to append</param>
+    ''' <returns>Current point count</returns>
+    Public Function AwardPoints(quantity As Integer) As Integer
+
+        totalPoints += quantity
+
+        lblScore.Text = "Points: " & totalPoints
+
+        Return totalPoints
+
+    End Function
+
+    Private Sub lblQuit_Click(sender As Object, e As EventArgs) Handles lblQuit.Click
+
+
+
+    End Sub
 End Class
 
 ''' <summary>
@@ -206,32 +286,56 @@ End Class
 ''' Codes for all of the pieces and the formation of those pieces
 ''' </summary>
 ''' TODO: UPDATE THIS TO USE FILES FOR STORAGE AS OPPOSED TO HARD CODING
-''' MAYBE TODO: Fix implicit declarations. Not a problem, but possibly something that I could fix.
-Class Pieces
+''' MAYBE TODO: Fix implicit declarations. Not a problem, but possibly something that could be better.
+Module Pieces
 
-    Public Shared ReadOnly piece1 = {{1, 1}, {1, 0}, {0, 1}, {0, 0}} ' 2x2
-    Public Shared ReadOnly piece2 = {{0, 1}, {2, 0}, {1, 0}, {0, 0}} ' Right-skew L
-    Public Shared ReadOnly piece3 = {{2, 1}, {2, 0}, {1, 0}, {0, 0}} ' Left-skew L
-    Public Shared ReadOnly piece4 = {{1, 1}, {0, 1}, {2, 0}, {1, 0}} ' Right-skew Z
-    Public Shared ReadOnly piece5 = {{2, 1}, {1, 1}, {1, 0}, {0, 0}} ' Left-skew Z
-    Public Shared ReadOnly piece6 = {{0, 2}, {0, 1}, {0, 0}} ' Straight line
-    Public Shared ReadOnly piece7 = {{2, 1}, {1, 1}, {0, 1}, {1, 0}} ' T Shape
+    Public ReadOnly piece1 = {New Point(1, 1), New Point(1, 0), New Point(0, 1), New Point(0, 0)} ' 2x2 
+    Public ReadOnly piece2 = {New Point(0, 1), New Point(2, 0), New Point(1, 0), New Point(0, 0)} ' Right-skew L
+    Public ReadOnly piece3 = {New Point(2, 1), New Point(2, 0), New Point(1, 0), New Point(0, 0)} ' Left-skew L
+    Public ReadOnly piece4 = {New Point(1, 1), New Point(0, 1), New Point(2, 0), New Point(1, 0)} ' Right-skew Z
+    Public ReadOnly piece5 = {New Point(2, 1), New Point(1, 1), New Point(1, 0), New Point(0, 0)} ' Left-skew Z
+    Public ReadOnly piece6 = {New Point(0, 2), New Point(0, 1), New Point(0, 0)} ' Straight line
+    Public ReadOnly piece7 = {New Point(2, 1), New Point(1, 1), New Point(0, 1), New Point(1, 0)} ' T Shape
+
+    Public piece1Enabled As Boolean = True
+    Public piece2Enabled As Boolean = True
+    Public piece3Enabled As Boolean = True
+    Public piece4Enabled As Boolean = True
+    Public piece5Enabled As Boolean = True
+    Public piece6Enabled As Boolean = True
+    Public piece7Enabled As Boolean = True
+
+    Public enabledArray As Boolean() = {piece1Enabled, piece2Enabled, piece3Enabled, piece4Enabled, piece5Enabled, piece6Enabled, piece7Enabled}
+    Public ReadOnly piecesRaw = {piece1, piece2, piece3, piece4, piece5, piece6, piece7}
 
     ''' <summary>
     ''' Returns a random piece
     ''' </summary>
     ''' <returns></returns>
-    Public Shared Function GetRandomPiece()
+    Public Function GetRandomPiece()
 
-        'Random num gen
+        'Creates a list of all pieces
+        'Filters out disabled pieces
+        Dim allPieces As List(Of Point()) = New List(Of Point())
+
+
+        For i As Integer = 0 To 6
+
+            If enabledArray(i) Then
+
+                allPieces.Add(piecesRaw(i))
+
+            End If
+
+        Next i
+
+        'Random num gen. Picks a random piece from the list
         Call Randomize()
-        Dim num As Integer = Int(Rnd() * 7)
+        Dim num As Integer = Int(Rnd() * allPieces.Count)
 
-        'Pics random piece and returns
-        Dim allPieces = {piece1, piece2, piece3, piece4, piece5, piece6, piece7}
-
+        'Returns random piece
         Return allPieces(num)
 
     End Function
 
-End Class
+End Module

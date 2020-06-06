@@ -18,6 +18,8 @@ Public Class frmReturnToMonke
     'Opens settings form
     Private Sub cmdSettings_Click(sender As Object, e As EventArgs) Handles cmdSettings.Click
 
+        frmSettings.Show()
+
     End Sub
 
     'Form Load
