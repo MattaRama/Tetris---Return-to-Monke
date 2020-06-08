@@ -59,7 +59,7 @@ Partial Class frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(559, 600)
+        Me.ClientSize = New System.Drawing.Size(326, 202)
         Me.Controls.Add(Me.cmdUpdatePieces)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.clbEnabledPieces)
