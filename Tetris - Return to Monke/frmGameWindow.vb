@@ -274,9 +274,14 @@ Public Class frmGameWindow
 
     End Function
 
+    ''' <summary>
+    ''' Goes back to lobby screen and resets
+    ''' </summary>
     Private Sub lblQuit_Click(sender As Object, e As EventArgs) Handles lblQuit.Click
 
-
+        frmReturnToMonke.Show() 'Shows main screen
+        SharedResources.gameWindow = New frmGameWindow() ' Creates new game session, essentially resetting
+        Close() ' Closes current game session
 
     End Sub
 End Class

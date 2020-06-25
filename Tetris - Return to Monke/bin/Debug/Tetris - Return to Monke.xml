@@ -59,6 +59,11 @@ Tetris - Return to Monke
  <param name="quantity">Amount to append</param>
  <returns>Current point count</returns>
 </member>
+<member name="M:Tetris___Return_to_Monke.frmGameWindow.lblQuit_Click(System.Object,System.EventArgs)">
+ <summary>
+ Goes back to lobby screen and resets
+ </summary>
+</member>
 <member name="T:Tetris___Return_to_Monke.Pieces">
  <summary>
  I was going to use an enum for this but I didn't know they dont support classes or non-elementary data types.
